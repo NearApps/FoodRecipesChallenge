@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FoodRecipes</string>
+    <string name="nav_item_premium">PREMIUM</string>
+    <string name="nav_item_free">Free</string>
 </resources>

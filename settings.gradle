@@ -10,7 +10,17 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        //maven { url 'https://jitpack.io' }
+    }
+    versionCatalogs {
+        create("libs") {
+            from(files("/gradle/libs.version.toml"))
+        }
     }
 }
 rootProject.name = "FoodRecipes"
 include ':app'
+include ':data:local'
+include ':data:remote'
+include ':core:common'
+include ':core:ui'
