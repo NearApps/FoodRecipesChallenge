@@ -1,4 +1,4 @@
-package com.neardev.challenge.foodrecipe.presentation.screen.home.components
+package com.neardev.challenge.foodrecipe.presentation.screen.nav_home.components
 
 import android.content.Context
 import android.content.Intent

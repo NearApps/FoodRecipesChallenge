@@ -35,6 +35,10 @@ class FoodRepository {
         return RetrofitInstance.api.search(searchQuery)
     }
 
+    suspend fun searchFirstLetter(searchQuery:String): Response<FilterResponse>{
+        return RetrofitInstance.api.searchFirstLetter(searchQuery)
+    }
+
     suspend fun getRecipeById(id:String): Response<RecipeResponse>{
         return RetrofitInstance.api.getRecipeById(id)
     }

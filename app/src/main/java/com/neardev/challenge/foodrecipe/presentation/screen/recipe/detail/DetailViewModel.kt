@@ -1,11 +1,11 @@
-package com.neardev.challenge.foodrecipe.presentation.screen.maps
+package com.neardev.challenge.foodrecipe.presentation.screen.recipe.detail
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MapsViewModel @Inject constructor(
+class DetailViewModel @Inject constructor(
 
 ) : ViewModel() {
 

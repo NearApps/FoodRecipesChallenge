@@ -1,4 +1,4 @@
-package com.neardev.challenge.foodrecipe.presentation.screen.detail.components
+package com.neardev.challenge.foodrecipe.presentation.screen.recipe.detail.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

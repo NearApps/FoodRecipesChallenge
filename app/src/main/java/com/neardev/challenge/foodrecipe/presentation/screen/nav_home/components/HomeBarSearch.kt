@@ -1,4 +1,4 @@
-package com.neardev.challenge.foodrecipe.presentation.screen.home.components
+package com.neardev.challenge.foodrecipe.presentation.screen.nav_home.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState

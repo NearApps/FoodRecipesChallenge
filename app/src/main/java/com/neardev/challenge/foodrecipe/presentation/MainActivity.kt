@@ -7,7 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
-import com.neardev.challenge.foodrecipe.presentation.navigation.Feature
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +19,7 @@ class MainActivity : ComponentActivity() {
             val data: Uri? = intent?.data
             if (action != null && data != null) {
                 val appState = rememberAppState()
-                appState.setStartDestination(Feature.FREE)
+                appState.setStartDestination("")
             }
 
             AppUi(

@@ -1,4 +1,4 @@
-package com.neardev.challenge.foodrecipe.presentation.screen.maps
+package com.neardev.challenge.foodrecipe.presentation.screen.recipe.maps
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package com.neardev.challenge.foodrecipe.presentation.screen.home
+package com.neardev.challenge.foodrecipe.presentation.screen.nav_home
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class NavHomeViewModel @Inject constructor(
 
 ) : ViewModel() {
 
