@@ -1,5 +1,6 @@
 package com.neardev.challenge.foodrecipe.presentation.screen.recipe.detail.components
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,13 +19,14 @@ import com.decathlon.vitamin.compose.vitaminicons.Fill
 import com.decathlon.vitamin.compose.vitaminicons.fill.Github
 import com.decathlon.vitamin.compose.vitaminicons.fill.Share
 import com.decathlon.vitamin.compose.vitaminicons.fill.Youtube
+import com.neardev.challenge.foodrecipe.utilities.openLink
 
 @Composable
 fun SocialReciper(
     modifier: Modifier = Modifier,
-    onGithubClick: () -> Unit = {},
-    onYoutubeClick: () -> Unit = {},
-    onShareClick: () -> Unit = {},
+    context : Context,
+    onYoutubeStr: String,
+    onShareStr: String,
 ) {
     Row(
         modifier = Modifier
@@ -37,7 +39,12 @@ fun SocialReciper(
             colors = VitaminTagColors.brand(),
             iconPainter = rememberVectorPainter(VitaminIcons.Fill.Github),
             sizes = VitaminTagSizes.medium(),
-            onClick = onGithubClick
+            onClick = {
+                openLink(
+                    context,
+                    "https://github.com/NearApps/FoodRecipesChallenge"
+                )
+            }
         )
         Spacer(modifier = Modifier.width(10.dp))
         VitaminTags.Accent(
@@ -45,7 +52,11 @@ fun SocialReciper(
             colors = VitaminTagColors.alert(),
             iconPainter = rememberVectorPainter(VitaminIcons.Fill.Youtube),
             sizes = VitaminTagSizes.medium(),
-            onClick = onYoutubeClick
+            onClick = {
+                if (onYoutubeStr.isNotEmpty()){
+                    openLink(context, onYoutubeStr)
+                }
+            }
         )
         Spacer(modifier = Modifier.width(10.dp))
         VitaminTags.Accent(
@@ -53,7 +64,11 @@ fun SocialReciper(
             colors = VitaminTagColors.decorativeGravel(),
             iconPainter = rememberVectorPainter(VitaminIcons.Fill.Share),
             sizes = VitaminTagSizes.medium(),
-            onClick = onShareClick
+            onClick = {
+                if (onShareStr.isNotEmpty()){
+                    openLink(context, onShareStr)
+                }
+            }
         )
     }
 }

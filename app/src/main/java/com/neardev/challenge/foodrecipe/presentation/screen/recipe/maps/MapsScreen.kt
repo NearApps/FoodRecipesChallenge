@@ -1,15 +1,20 @@
 package com.neardev.challenge.foodrecipe.presentation.screen.recipe.maps
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.neardev.challenge.foodrecipe.presentation.components.app_bars.AppTopBar
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.CameraPositionState
+import com.google.maps.android.compose.Circle
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
 fun MapsScreen(
@@ -18,26 +23,26 @@ fun MapsScreen(
     longitude: String,
     onBackClicked: () -> Unit,
 ){
-    Scaffold(
-        topBar = {
-            AppTopBar(
-                title = "Map on Restaurant",
-                onBackClick = onBackClicked
-            )
-        }
-    ){ innerPadding ->
-        Box(
+    val markerRecipe = LatLng(latitude.toDouble(), longitude.toDouble())
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        GoogleMap(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(20.dp)
-            ) {
-                Text(text = "Maps Screen")
-            }
+                .fillMaxSize(),
+            cameraPositionState = rememberCameraPositionState {
+                position = CameraPosition.fromLatLngZoom(markerRecipe, 18f)
+            },
+        ){
+            Marker(
+                title = "Recipe Location",
+                snippet = "This is the location of the recipe",
+                state = MarkerState(
+                    position = markerRecipe
+                ),
+            )
         }
     }
 }

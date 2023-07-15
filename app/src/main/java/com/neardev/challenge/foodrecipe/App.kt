@@ -1,7 +1,7 @@
 package com.neardev.challenge.foodrecipe
 
 import android.app.Application
-import com.neardev.challenge.foodrecipe.core.common.KLog
+import com.neardev.challenge.foodrecipe.domain.utilities.KLog
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FoodRecipes</string>
+    <string name="app_name">Food Recipes</string>
 
     <string name="nav_item_home">Search</string>
     <string name="nav_item_category">Category</string>

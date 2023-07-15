@@ -25,6 +25,8 @@ import kotlin.random.Random
 fun TittleRecipe(
     modifier: Modifier = Modifier,
     title: String = "Recipe Name",
+    rate : Float = 2.5f,
+    comments: Int = 55,
     onMapDetailClicked: () -> Unit,
 ) {
     Row(
@@ -45,8 +47,8 @@ fun TittleRecipe(
                     .fillMaxWidth(),
             )
             VitaminRatings.ReadOnly(
-                number = (Random.nextFloat() * (5 - 1) + 1),
-                nbComments = (0..80).random(),
+                number = rate,
+                nbComments = comments,
                 showNote = true,
                 sizes = VitaminRatingSizes.small(),
                 //colors = colors
@@ -67,7 +69,7 @@ fun TittleRecipe(
                     .padding(10.dp),
             )
             Text(
-                text = "View on map",
+                text = "Open Map",
                 color = VitaminTheme.colors.vtmnContentSecondary,
                 style = VitaminTheme.typography.caption,
                 //textAlign = TextAlign.Center,

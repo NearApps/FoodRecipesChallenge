@@ -1,7 +1,11 @@
 package com.neardev.challenge.foodrecipe.presentation.screen.nav_home
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.displayCutoutPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -14,11 +18,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.decathlon.vitamin.compose.foundation.VitaminTheme
 import com.decathlon.vitamin.compose.foundation.vtmnTypography
+import com.neardev.challenge.foodrecipe.presentation.components.CardRecipe
+import com.neardev.challenge.foodrecipe.presentation.components.HomeBarSearch
+import com.neardev.challenge.foodrecipe.presentation.components.StaggeredVerticalGrid
 import com.neardev.challenge.foodrecipe.presentation.screen.ViewModelProvider
-import com.neardev.challenge.foodrecipe.presentation.screen.nav_home.components.HomeBarSearch
-
+import com.neardev.challenge.foodrecipe.utilities.extension.text.normalizeText
 
 @Composable
 fun NavHomeScreen(
@@ -26,13 +33,19 @@ fun NavHomeScreen(
 ) {
 
     val context = LocalContext.current
-    val scrollState = rememberLazyListState()
-    val homeViewModel = ViewModelProvider.homeViewModel
+
+    val homeViewModel: NavHomeViewModel = ViewModelProvider.homeViewModel
     val viewState = homeViewModel.viewState
+
     val searching = remember { mutableStateOf("") }
+    //val loading = remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        //homeViewModel.onViewScreen()
+        homeViewModel.viewEventFlow.collect { viewEvent ->
+            when (viewEvent) {
+                is NavHomeViewModel.ViewEvent.NavigateToDetail -> onDetailClicked(viewEvent.idRecipe)
+            }
+        }
     }
 
     Column(
@@ -41,26 +54,28 @@ fun NavHomeScreen(
             .padding(20.dp)
     ) {
 
-        HomeBarSearch( searching = searching )
+        HomeBarSearch(
+            onSearching = {
+                searching.value = it.normalizeText()
+                homeViewModel.searchFilter(searching.value.ifEmpty { "a" })
+            },
+        )
 
         Text(
-            text = if (searching.value.isEmpty()) { "Categories" } else { "Searching for \"${searching.value}\"" },
+            text = if (searching.value.isEmpty()) { "All recipes" } else { "Searching for \"${searching.value}\"" },
             color = VitaminTheme.colors.vtmnContentSecondary,
             style = vtmnTypography.h6,
             modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
         )
 
         LazyColumn(
-            state = scrollState,
+            state = rememberLazyListState(),
             modifier = Modifier.fillMaxSize()
         ) {
             when (viewState) {
                 is NavHomeViewModel.ViewState.Loading -> {
                     item {
-                        Text(text = "Loading")
-                        Button(onClick = { onDetailClicked("1") }) {
-                            Text(text = "Open Detail")
-                        }
+                        Text(text = "Loading...")
                     }
                 }
                 is NavHomeViewModel.ViewState.Error -> {
@@ -68,11 +83,41 @@ fun NavHomeScreen(
                         Text(text = "Error")
                     }
                 }
-                /*is HomeViewModel.ViewState.Content -> {
+                is NavHomeViewModel.ViewState.NotFound -> {
                     item {
-
+                        Text(text = "Not found")
                     }
-                }*/
+                }
+                is NavHomeViewModel.ViewState.Content -> {
+                    item {
+                        StaggeredVerticalGrid(
+                            crossAxisCount = 2,
+                            spacing = 10.dp,
+                            modifier = Modifier.padding(horizontal = 10.dp)
+                        ) {
+                            val recipes = viewState.recipes
+                            /*val filterRecipers = if(searching.value.isBlank()){
+                                recipes
+                            }else{
+                                recipes.filter { recipe ->
+                                    val lowerCaseTitle = recipe.name.normalizeText()
+                                    val lowerSearchText = searching.value.normalizeText()
+                                    lowerCaseTitle.contains(lowerSearchText)
+                                }
+                            }*/
+
+                            /*filterRecipers.*/recipes.forEach { recipe ->
+                            CardRecipe(
+                                modifier = Modifier
+                                    .height(150.dp),
+                                title = recipe.name,
+                                imageUrl = recipe.img_url,
+                                onClick = { onDetailClicked(recipe.id) }
+                            )
+                        }
+                        }
+                    }
+                }
             }
         }
     }
