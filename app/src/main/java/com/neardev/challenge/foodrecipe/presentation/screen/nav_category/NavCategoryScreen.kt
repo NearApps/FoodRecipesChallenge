@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -29,13 +30,16 @@ fun NavCategoryScreen (
     val categoryViewModel: NavCategoryViewModel = ViewModelProvider.navCategoryViewModel
     val viewState = categoryViewModel.viewState
 
+    LaunchedEffect(Unit) {
+        categoryViewModel.listAllCategory()
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(20.dp)
     ) {
         Text(
-            text = "Categories",
+            text = "All categories",
             color = VitaminTheme.colors.vtmnContentSecondary,
             style = vtmnTypography.h6,
             textAlign = TextAlign.Center,

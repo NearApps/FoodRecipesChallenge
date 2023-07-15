@@ -28,13 +28,13 @@ class NavHomeViewModel @Inject constructor(
     val viewEventFlow = _viewEventFlow.asSharedFlow()
 
     init {
-        searchFilter("a")
+        //searchFilter("a")
     }
 
-    fun searchFilter(search: String) {
+    fun searchFilter(search: String = "a") {
         viewModelScope.launch{
             viewState = ViewState.Loading
-            recipeRepository.getFilterByName(search).fold(
+            recipeRepository.getFilterByName(search.ifEmpty { "a" }).fold(
                 { failure ->
                     viewState = ViewState.Error(failure)
                 },

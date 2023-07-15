@@ -140,7 +140,7 @@ fun AppBottonBar(
                     return@SelectedActionItem true
                 }
             ),
-            /*SelectedActionItem(
+            SelectedActionItem(
                 selected = selectedBottomNav.value == NavItemHome.INGREDIENTS.route,
                 icon = painterResource(R.drawable.ic_ingredients),
                 contentDescription = "Ingredients Icon",
@@ -150,7 +150,7 @@ fun AppBottonBar(
                     onBottomNavSelected(NavItemHome.INGREDIENTS.route);
                     return@SelectedActionItem true
                 }
-            )*/
+            )
         )
     )
 }

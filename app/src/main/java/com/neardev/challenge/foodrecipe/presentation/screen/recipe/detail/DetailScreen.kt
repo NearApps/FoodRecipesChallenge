@@ -15,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.neardev.challenge.foodrecipe.domain.model.RecipeDetail
+import com.neardev.challenge.foodrecipe.presentation.components.ErrorView
+import com.neardev.challenge.foodrecipe.presentation.components.LoadingPlaceholder
 import com.neardev.challenge.foodrecipe.presentation.screen.ViewModelProvider
 import com.neardev.challenge.foodrecipe.presentation.screen.nav_home.NavHomeViewModel
 import com.neardev.challenge.foodrecipe.presentation.screen.recipe.detail.components.TittleRecipe
@@ -44,10 +46,15 @@ fun DetailScreen(
     ){
         when (viewState) {
             is DetailViewModel.ViewState.Error -> {
-                Text(text = viewState.throwable.message ?: "Error")
+                ErrorView(
+                    text = "Ha ocurrido un error.",
+                    textButton = "Regresar"
+                ) {
+                    onBackClicked()
+                }
             }
             DetailViewModel.ViewState.Loading -> {
-                Text(text = "Loading...")
+                LoadingPlaceholder()
             }
             is DetailViewModel.ViewState.Content -> {
                 ContentDetailScreen(

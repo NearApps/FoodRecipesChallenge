@@ -23,7 +23,7 @@ class NavCategoryViewModel @Inject constructor(
         private set
 
     init {
-        listAllCategory()
+        //listAllCategory()
     }
 
     fun listAllCategory() {

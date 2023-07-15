@@ -22,13 +22,19 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.decathlon.vitamin.compose.foundation.VitaminTheme
 import com.decathlon.vitamin.compose.foundation.vtmnTypography
+import com.neardev.challenge.foodrecipe.domain.utilities.Constants.Companion.SEARCH_DELAY
 import com.neardev.challenge.foodrecipe.presentation.components.CardRecipe
+import com.neardev.challenge.foodrecipe.presentation.components.EmptyView
 import com.neardev.challenge.foodrecipe.presentation.components.ErrorView
 import com.neardev.challenge.foodrecipe.presentation.components.HomeBarSearch
 import com.neardev.challenge.foodrecipe.presentation.components.LoadingPlaceholder
 import com.neardev.challenge.foodrecipe.presentation.components.StaggeredVerticalGrid
 import com.neardev.challenge.foodrecipe.presentation.screen.ViewModelProvider
 import com.neardev.challenge.foodrecipe.utilities.extension.text.normalizeText
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun NavHomeScreen(
@@ -40,10 +46,11 @@ fun NavHomeScreen(
     val homeViewModel: NavHomeViewModel = ViewModelProvider.homeViewModel
     val viewState = homeViewModel.viewState
 
-    val searching = remember { mutableStateOf("") }
+    val searching = remember { mutableStateOf(EMPTY_SEARCH) }
     //val loading = remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
+        homeViewModel.searchFilter()
         homeViewModel.viewEventFlow.collect { viewEvent ->
             when (viewEvent) {
                 is NavHomeViewModel.ViewEvent.NavigateToDetail -> onDetailClicked(viewEvent.idRecipe)
@@ -59,11 +66,14 @@ fun NavHomeScreen(
         HomeBarSearch(
             onChangeListener = { str ->
                 searching.value = str
-                homeViewModel.searchFilter(searching.value.ifEmpty { "a" })
+                MainScope().launch {
+                    delay(SEARCH_DELAY)
+                    homeViewModel.searchFilter(searching.value)
+                }
             },
             onClickClose = {
-                searching.value = ""
-                homeViewModel.searchFilter(searching.value.ifEmpty { "a" })
+                searching.value = EMPTY_SEARCH
+                homeViewModel.searchFilter()
             },
         )
 
@@ -90,18 +100,18 @@ fun NavHomeScreen(
                             text = "Ha ocurrido un error. Intentelo denuevo",
                             textButton = "Prueba de nuevo"
                         ) {
-                            homeViewModel.searchFilter(searching.value.ifEmpty { "a" })
+                            homeViewModel.searchFilter()
                         }
                     }
                 }
                 is NavHomeViewModel.ViewState.NotFound -> {
                     item {
-                        ErrorView(
+                        EmptyView(
                             text = "No se encontro resultados",
                             textButton = "Limpiar"
                         ) {
-                            searching.value = ""
-                            homeViewModel.searchFilter(searching.value.ifEmpty { "a" })
+                            searching.value = EMPTY_SEARCH
+                            homeViewModel.searchFilter()
                         }
                     }
                 }
@@ -139,3 +149,5 @@ fun NavHomeScreen(
         }
     }
 }
+
+private const val EMPTY_SEARCH = ""
