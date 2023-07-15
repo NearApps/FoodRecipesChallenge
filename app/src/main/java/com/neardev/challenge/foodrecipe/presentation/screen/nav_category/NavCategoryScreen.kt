@@ -16,6 +16,8 @@ import com.decathlon.vitamin.compose.foundation.VitaminTheme
 import com.decathlon.vitamin.compose.foundation.vtmnTypography
 import com.neardev.challenge.foodrecipe.presentation.components.CardCategory
 import com.neardev.challenge.foodrecipe.presentation.components.CardRecipe
+import com.neardev.challenge.foodrecipe.presentation.components.ErrorView
+import com.neardev.challenge.foodrecipe.presentation.components.LoadingPlaceholder
 import com.neardev.challenge.foodrecipe.presentation.components.StaggeredVerticalGrid
 import com.neardev.challenge.foodrecipe.presentation.screen.ViewModelProvider
 
@@ -49,12 +51,17 @@ fun NavCategoryScreen (
             when(viewState){
                 is NavCategoryViewModel.ViewState.Error -> {
                     item {
-                        Text(text = "Error")
+                        ErrorView(
+                            text = "Ha ocurrido un error. Intentelo denuevo",
+                            textButton = "Prueba de nuevo"
+                        ) {
+                            categoryViewModel.listAllCategory()
+                        }
                     }
                 }
                 NavCategoryViewModel.ViewState.Loading -> {
                     item {
-                        Text(text = "Loading...")
+                        LoadingPlaceholder()
                     }
                 }
                 is NavCategoryViewModel.ViewState.Content -> {

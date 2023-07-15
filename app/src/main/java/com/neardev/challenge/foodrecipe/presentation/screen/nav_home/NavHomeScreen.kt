@@ -17,12 +17,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.decathlon.vitamin.compose.foundation.VitaminTheme
 import com.decathlon.vitamin.compose.foundation.vtmnTypography
 import com.neardev.challenge.foodrecipe.presentation.components.CardRecipe
+import com.neardev.challenge.foodrecipe.presentation.components.ErrorView
 import com.neardev.challenge.foodrecipe.presentation.components.HomeBarSearch
+import com.neardev.challenge.foodrecipe.presentation.components.LoadingPlaceholder
 import com.neardev.challenge.foodrecipe.presentation.components.StaggeredVerticalGrid
 import com.neardev.challenge.foodrecipe.presentation.screen.ViewModelProvider
 import com.neardev.challenge.foodrecipe.utilities.extension.text.normalizeText
@@ -53,10 +56,13 @@ fun NavHomeScreen(
             .fillMaxSize()
             .padding(20.dp)
     ) {
-
         HomeBarSearch(
-            onSearching = {
-                searching.value = it.normalizeText()
+            onChangeListener = { str ->
+                searching.value = str
+                homeViewModel.searchFilter(searching.value.ifEmpty { "a" })
+            },
+            onClickClose = {
+                searching.value = ""
                 homeViewModel.searchFilter(searching.value.ifEmpty { "a" })
             },
         )
@@ -75,17 +81,28 @@ fun NavHomeScreen(
             when (viewState) {
                 is NavHomeViewModel.ViewState.Loading -> {
                     item {
-                        Text(text = "Loading...")
+                        LoadingPlaceholder()
                     }
                 }
                 is NavHomeViewModel.ViewState.Error -> {
                     item {
-                        Text(text = "Error")
+                        ErrorView(
+                            text = "Ha ocurrido un error. Intentelo denuevo",
+                            textButton = "Prueba de nuevo"
+                        ) {
+                            homeViewModel.searchFilter(searching.value.ifEmpty { "a" })
+                        }
                     }
                 }
                 is NavHomeViewModel.ViewState.NotFound -> {
                     item {
-                        Text(text = "Not found")
+                        ErrorView(
+                            text = "No se encontro resultados",
+                            textButton = "Limpiar"
+                        ) {
+                            searching.value = ""
+                            homeViewModel.searchFilter(searching.value.ifEmpty { "a" })
+                        }
                     }
                 }
                 is NavHomeViewModel.ViewState.Content -> {

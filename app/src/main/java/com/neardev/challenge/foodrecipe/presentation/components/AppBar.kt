@@ -28,6 +28,7 @@ import com.decathlon.vitamin.compose.foundation.VitaminTheme
 import com.decathlon.vitamin.compose.vitaminicons.Line
 import com.decathlon.vitamin.compose.vitaminicons.line.Github
 import com.decathlon.vitamin.compose.vitaminicons.line.Search
+import com.google.android.material.slider.BaseOnChangeListener
 import com.neardev.challenge.foodrecipe.R
 import com.neardev.challenge.foodrecipe.presentation.navigation.NavItemHome
 import com.neardev.challenge.foodrecipe.utilities.openLink
@@ -73,7 +74,7 @@ fun AppTopBar(
 
 @Composable
 fun HomeBarSearch(
-    onSearching: (String) -> Unit = {},
+    onChangeListener: (String) -> Unit = {},
     onClickClose: () -> Unit = {}
 ) {
     val searching = remember { mutableStateOf("") }
@@ -82,7 +83,7 @@ fun HomeBarSearch(
         placeholder = "Type to search",
         onValueChange = {
             searching.value = it
-            onSearching(it)
+            onChangeListener(searching.value)
         },
         navigationIcon = {
             if (searching.value == "") {
@@ -90,9 +91,8 @@ fun HomeBarSearch(
             } else {
                 Context(
                     onClick = {
-                        onClickClose()
                         searching.value = ""
-                        onSearching("")
+                        onClickClose()
                     },
                     contentDescription = "Back"
                 )
@@ -102,9 +102,8 @@ fun HomeBarSearch(
             SearchActionItem.Close(
                 contentDescription = "Close search bar",
                 onClick = {
-                    onClickClose()
                     searching.value = ""
-                    onSearching("")
+                    onClickClose()
                 }
             )
         ),
@@ -167,7 +166,7 @@ private fun DetailTopBarPreview(
             Spacer(modifier = Modifier.height(10.dp))
             AppTopBar( title = "Title" )
             Spacer(modifier = Modifier.height(10.dp))
-            HomeBarSearch( onSearching = {} )
+            HomeBarSearch()
             Spacer(modifier = Modifier.height(10.dp))
             AppBottonBar()
         }

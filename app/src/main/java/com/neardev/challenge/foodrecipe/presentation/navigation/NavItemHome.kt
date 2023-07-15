@@ -3,7 +3,7 @@ package com.neardev.challenge.foodrecipe.presentation.navigation
 enum class NavItemHome(val route: String) {
     HOME("home"),
     CATEGORY("category"),
-    AREA("area"),
+    //AREA("area"),
     INGREDIENTS("ingredients")
 }
 
