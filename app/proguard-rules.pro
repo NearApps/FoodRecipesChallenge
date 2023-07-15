@@ -1,21 +1,24 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+### Crashlytics
+-keep public class * extends java.lang.Exception
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**
+-keep class com.google.firebase.crashlytics.** { *; }
+-dontwarn com.google.firebase.crashlytics.**
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+### Crash reports
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+### New rules after updating to Java 17
+-dontwarn org.bouncycastle.jsse.BCSSLParameters
+-dontwarn org.bouncycastle.jsse.BCSSLSocket
+-dontwarn org.bouncycastle.jsse.provider.BouncyCastleJsseProvider
+-dontwarn org.conscrypt.Conscrypt$Version
+-dontwarn org.conscrypt.Conscrypt
+-dontwarn org.conscrypt.ConscryptHostnameVerifier
+-dontwarn org.junit.jupiter.api.extension.AfterAllCallback
+-dontwarn org.junit.jupiter.api.extension.ParameterResolver
+-dontwarn org.junit.jupiter.api.extension.TestInstancePostProcessor
+-dontwarn org.openjsse.javax.net.ssl.SSLParameters
+-dontwarn org.openjsse.javax.net.ssl.SSLSocket
+-dontwarn org.openjsse.net.ssl.OpenJSSE
