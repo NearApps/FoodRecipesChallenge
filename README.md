@@ -5,16 +5,16 @@ Aplicación de Android que consume [TheMealDB](https://www.themealdb.com/).
 ## Demo
 <table>
     <tr>
-        <td> Home<br/><img src="media/screenshot1.png"  width="160"></td>
-        <td> Home Dark<br/><img src="media/screenshot1_dark.png" alt="Main screen" width="160"></td>
-        <td> Categories<br/><img src="media/screenshot2.png"  width="160"></td>
-        <td> Categories Dark<br/><img src="media/screenshot2_dark.png" alt="Main screen" width="160"></td>
+        <td> Home<br/><img src="media/screenshot1.png"  width="180"></td>
+        <td> Home Dark<br/><img src="media/screenshot1_dark.png" alt="Main screen" width="180"></td>
+        <td> Categories<br/><img src="media/screenshot2.png"  width="180"></td>
+        <td> Categories Dark<br/><img src="media/screenshot2_dark.png" alt="Main screen" width="180"></td>
     </tr> 
     <tr>
-       <td> Recipe Detail<br/><img src="media/screenshot2.png"  width="160"></td>
-        <td> Recipe Detail Dark<br/><img src="media/screenshot2_dark.png" alt="Main screen" width="160"></td>
-        <td> Recipe Map<br/><img src="media/screenshot4.png"  width="160"></td>
-        <td> Recipe Map Dark<br/><img src="media/screenshot4_dark.png" alt="Main screen" width="160"></td>
+       <td> Recipe Detail<br/><img src="media/screenshot2.png"  width="180"></td>
+        <td> Recipe Detail Dark<br/><img src="media/screenshot2_dark.png" alt="Main screen" width="180"></td>
+        <td> Recipe Map<br/><img src="media/screenshot4.png"  width="180"></td>
+        <td> Recipe Map Dark<br/><img src="media/screenshot4_dark.png" alt="Main screen" width="180"></td>
     </tr> 
 </table>
 
