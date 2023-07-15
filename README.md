@@ -1,21 +1,20 @@
 # Food Recipes App
-Aplicación de Android que consume [TheMealDB](https://www.themealdb.com/).
-Se ha construido con:
-principios de arquitectura limpia, patrón de repositorio y patrón MVVM, así como componentes de arquitectura.
+Aplicación de Android que consume [TheMealDB](https://www.themealdb.com/). 
+
 
 ## Demo
 <table>
     <tr>
-        <td> <img src="media/screenshot1.png"  width="150"></td>
-        <td> <img src="media/screenshot1_dark.png" alt="Main screen" width="150"></td>
-        <td> <img src="media/screenshot2.png"  width="150"></td>
-        <td> <img src="media/screenshot2_dark.png" alt="Main screen" width="150"></td>
+        <td> Home<br/><img src="media/screenshot1.png"  width="160"></td>
+        <td> Home Dark<br/><img src="media/screenshot1_dark.png" alt="Main screen" width="160"></td>
+        <td> Categories<br/><img src="media/screenshot2.png"  width="160"></td>
+        <td> Categories Dark<br/><img src="media/screenshot2_dark.png" alt="Main screen" width="160"></td>
     </tr> 
     <tr>
-       <td> <img src="media/screenshot3.png"  width="150"></td>
-        <td> <img src="media/screenshot3_dark.png" alt="Main screen" width="150"></td>
-        <td> <img src="media/screenshot4.png"  width="150"></td>
-        <td> <img src="media/screenshot4_dark.png" alt="Main screen" width="150"></td>
+       <td> Recipe Detail<br/><img src="media/screenshot2.png"  width="160"></td>
+        <td> Recipe Detail Dark<br/><img src="media/screenshot2_dark.png" alt="Main screen" width="160"></td>
+        <td> Recipe Map<br/><img src="media/screenshot4.png"  width="160"></td>
+        <td> Recipe Map Dark<br/><img src="media/screenshot4_dark.png" alt="Main screen" width="160"></td>
     </tr> 
 </table>
 
@@ -28,10 +27,11 @@ It's using:
 - Jetpack Compose
 - Google Maps
 - Hilt
-- Arrow
+- Arrow Kt (Typed Functional Programming)
 - Retrofit
 - Moshi
-- Glide
+- Glide from landscapist library
+- Vitamin Compose (UI Library)
 - ...
 
 
