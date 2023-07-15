@@ -5,7 +5,7 @@ Aplicación de Android que consume [TheMealDB](https://www.themealdb.com/).
 ## Demo
 <table>
     <tr>
-        <td>Ligth Mode</td>
+        <center>Ligth Mode</center>
     </tr> 
     <tr>
         <td> Home<br/><img src="media/screenshot1.png"  width="180"></td>
@@ -14,7 +14,7 @@ Aplicación de Android que consume [TheMealDB](https://www.themealdb.com/).
         <td> Recipe Detail<br/><img src="media/screenshot2.png"  width="180"></td>
     </tr> 
     <tr>
-        <td>Dark Mode</td>
+        <center>Dark Mode</center>
     </tr> 
     <tr>
         <td> Home<br/><img src="media/screenshot1_dark.png" alt="Main screen" width="180"></td>
